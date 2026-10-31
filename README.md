@@ -52,3 +52,16 @@ The engine deliberately handles only arithmetic. The Android UI should pass an e
 The current expression is preserved with `onSaveInstanceState`, so normal configuration changes such as device rotation do not discard the user's calculation.
 
 This project intentionally uses Android's built-in state restoration instead of a larger architecture framework because the application state is small and local to one screen.
+
+
+## App behavior
+
+The app is designed to behave like a basic calculator rather than only an expression demo:
+
+- Results remain available for the next calculation.
+- Pressing a number after `=` starts a new calculation.
+- Pressing an operator after `=` continues from the result.
+- Incomplete expressions stay quiet while the user is typing.
+- Calculation errors, such as division by zero, are shown clearly.
+- The current expression survives normal configuration changes.
+- Important symbol buttons include accessibility descriptions for screen readers.

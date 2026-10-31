@@ -58,37 +58,37 @@
     </LinearLayout>
 
     <LinearLayout style="@style/buttonRow">
-        <Button style="@style/buttonActionDanger" android:onClick="allClearAction" android:text="AC" />
-        <Button style="@style/buttonAction" android:onClick="backSpaceAction" android:text="⌫" />
-        <Button style="@style/buttonAction" android:onClick="parenthesisAction" android:text="(" />
-        <Button style="@style/buttonAction" android:onClick="parenthesisAction" android:text=")" />
+        <Button style="@style/buttonActionDanger" android:onClick="allClearAction" android:contentDescription="Clear all" android:text="AC" />
+        <Button style="@style/buttonAction" android:onClick="backSpaceAction" android:contentDescription="Delete last character" android:text="⌫" />
+        <Button style="@style/buttonAction" android:onClick="parenthesisAction" android:contentDescription="Open parenthesis" android:text="(" />
+        <Button style="@style/buttonAction" android:onClick="parenthesisAction" android:contentDescription="Close parenthesis" android:text=")" />
     </LinearLayout>
 
     <LinearLayout style="@style/buttonRow">
         <Button style="@style/buttonNumber" android:text="7" />
         <Button style="@style/buttonNumber" android:text="8" />
         <Button style="@style/buttonNumber" android:text="9" />
-        <Button style="@style/buttonOperator" android:text="÷" />
+        <Button style="@style/buttonOperator" android:contentDescription="Divide" android:text="÷" />
     </LinearLayout>
 
     <LinearLayout style="@style/buttonRow">
         <Button style="@style/buttonNumber" android:text="4" />
         <Button style="@style/buttonNumber" android:text="5" />
         <Button style="@style/buttonNumber" android:text="6" />
-        <Button style="@style/buttonOperator" android:text="×" />
+        <Button style="@style/buttonOperator" android:contentDescription="Multiply" android:text="×" />
     </LinearLayout>
 
     <LinearLayout style="@style/buttonRow">
         <Button style="@style/buttonNumber" android:text="1" />
         <Button style="@style/buttonNumber" android:text="2" />
         <Button style="@style/buttonNumber" android:text="3" />
-        <Button style="@style/buttonOperator" android:text="−" />
+        <Button style="@style/buttonOperator" android:contentDescription="Subtract" android:text="−" />
     </LinearLayout>
 
     <LinearLayout style="@style/buttonRow">
         <Button style="@style/buttonNumber" android:text="." />
         <Button style="@style/buttonNumber" android:text="0" />
-        <Button style="@style/buttonEqual" android:onClick="equalsAction" android:text="=" />
-        <Button style="@style/buttonOperator" android:text="+" />
+        <Button style="@style/buttonEqual" android:onClick="equalsAction" android:contentDescription="Calculate result" android:text="=" />
+        <Button style="@style/buttonOperator" android:contentDescription="Add" android:text="+" />
     </LinearLayout>
 </LinearLayout>
