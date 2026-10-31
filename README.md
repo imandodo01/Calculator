@@ -45,3 +45,10 @@ app/
 - reusable from different UI implementations
 
 The engine deliberately handles only arithmetic. The Android UI should pass an expression to the engine and display either the result or an appropriate error.
+
+
+## Android lifecycle
+
+The current expression is preserved with `onSaveInstanceState`, so normal configuration changes such as device rotation do not discard the user's calculation.
+
+This project intentionally uses Android's built-in state restoration instead of a larger architecture framework because the application state is small and local to one screen.
