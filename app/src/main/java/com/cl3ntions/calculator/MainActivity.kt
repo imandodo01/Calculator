@@ -20,7 +20,13 @@ class MainActivity : AppCompatActivity() {
         workingsText = findViewById(R.id.workingsTV)
         resultText = findViewById(R.id.resultTV)
 
+        expression = savedInstanceState?.getString(KEY_EXPRESSION).orEmpty()
         render()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putString(KEY_EXPRESSION, expression)
     }
 
     fun numberAction(view: View) {
