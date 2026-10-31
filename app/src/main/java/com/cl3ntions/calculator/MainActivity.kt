@@ -96,17 +96,17 @@ class MainActivity : AppCompatActivity() {
     fun equalsAction(view: View) {
         val evaluation = evaluateExpression()
 
-        if (evaluation.error != null) {
+        if (evaluation.value == null) {
             state = CalculatorUiState(
                 expression = expression,
-                result = evaluation.error,
-                error = evaluation.error
+                result = evaluation.error ?: "Invalid expression",
+                error = evaluation.error ?: "Invalid expression"
             )
-            render()
+            renderState()
             return
         }
 
-        expression = formatResult(requireNotNull(evaluation.value))
+        expression = formatResult(evaluation.value)
         render()
     }
 
@@ -124,12 +124,20 @@ class MainActivity : AppCompatActivity() {
                 result = evaluation.error,
                 error = evaluation.error
             )
+            evaluation.value != null -> CalculatorUiState(
+                expression = expression,
+                result = formatResult(evaluation.value)
+            )
             else -> CalculatorUiState(
                 expression = expression,
-                result = formatResult(requireNotNull(evaluation.value))
+                result = ""
             )
         }
 
+        renderState()
+    }
+
+    private fun renderState() {
         workingsText.text = if (state.expression.isEmpty()) "0" else formatExpression(state.expression)
         resultText.text = state.result
         resultText.setTextColor(
