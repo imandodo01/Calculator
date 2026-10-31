@@ -209,7 +209,7 @@ class MainActivity : AppCompatActivity() {
     private sealed interface Evaluation {
         data class Success(val value: Double) : Evaluation
         data class Error(val message: String) : Evaluation
-        data object Incomplete : Evaluation
+        object Incomplete : Evaluation
     }
 
     companion object {
