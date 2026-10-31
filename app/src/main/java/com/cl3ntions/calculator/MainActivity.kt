@@ -41,6 +41,7 @@ class MainActivity : AppCompatActivity() {
         val operation = when ((view as Button).text.toString()) {
             "×" -> "*"
             "÷" -> "/"
+            "−" -> "-"
             else -> view.text.toString()
         }
 
