@@ -12,6 +12,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var resultText: TextView
     private val calculator = CalculatorEngine()
     private var expression = ""
+    private var state = CalculatorUiState()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -93,34 +94,57 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun equalsAction(view: View) {
-        val result = evaluateExpression() ?: return
-        expression = formatResult(result)
-        render(finalResult = true)
-    }
+        val evaluation = evaluateExpression()
 
-    private fun render(finalResult: Boolean = false) {
-        workingsText.text = if (expression.isEmpty()) "0" else formatExpression(expression)
-
-        if (expression.isEmpty()) {
-            resultText.text = "0"
+        if (evaluation.error != null) {
+            state = CalculatorUiState(
+                expression = expression,
+                result = evaluation.error,
+                error = evaluation.error
+            )
+            render()
             return
         }
 
-        val result = evaluateExpression()
-        resultText.text = when {
-            finalResult && result != null -> formatResult(result)
-            result != null -> formatResult(result)
-            else -> ""
-        }
+        expression = formatResult(requireNotNull(evaluation.value))
+        render()
     }
 
-    private fun evaluateExpression(): Double? {
+    private fun render() {
+        val evaluation = if (expression.isEmpty()) {
+            Evaluation(value = 0.0)
+        } else {
+            evaluateExpression()
+        }
+
+        state = when {
+            expression.isEmpty() -> CalculatorUiState()
+            evaluation.error != null -> CalculatorUiState(
+                expression = expression,
+                result = evaluation.error,
+                error = evaluation.error
+            )
+            else -> CalculatorUiState(
+                expression = expression,
+                result = formatResult(requireNotNull(evaluation.value))
+            )
+        }
+
+        workingsText.text = if (state.expression.isEmpty()) "0" else formatExpression(state.expression)
+        resultText.text = state.result
+        resultText.setTextColor(
+            getColor(if (state.error == null) R.color.text_primary else R.color.danger_text)
+        )
+    }
+
+    private fun evaluateExpression(): Evaluation {
         return try {
-            calculator.evaluate(expression)
+            Evaluation(value = calculator.evaluate(expression))
+        } catch (exception: ArithmeticException) {
+            Evaluation(error = exception.message ?: "Calculation error")
         } catch (_: IllegalArgumentException) {
-            null
-        } catch (_: ArithmeticException) {
-            null
+            // Incomplete input is normal while the user is typing.
+            Evaluation(error = null)
         }
     }
 
@@ -130,4 +154,9 @@ class MainActivity : AppCompatActivity() {
     private fun formatResult(value: Double): String {
         return if (value % 1.0 == 0.0) value.toLong().toString() else value.toString()
     }
+
+    private data class Evaluation(
+        val value: Double? = null,
+        val error: String? = null
+    )
 }
