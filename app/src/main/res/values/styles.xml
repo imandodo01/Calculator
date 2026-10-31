@@ -1,30 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <style name="buttonRow">
-        <item name="android:layout_weight">1</item>
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_height">64dp</item>
+        <item name="android:layout_marginTop">8dp</item>
     </style>
 
-    <style name="buttonNumber">
-        <item name="android:layout_weight">1</item>
+    <style name="buttonBase">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">match_parent</item>
-        <item name="android:background">@null</item>
-        <item name="android:textSize">25sp</item>
-        <item name="android:textColor">@color/white</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_margin">3dp</item>
+        <item name="android:fontFamily">sans</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:stateListAnimator">@null</item>
+    </style>
+
+    <style name="buttonNumber" parent="buttonBase">
+        <item name="android:background">@drawable/button_number</item>
+        <item name="android:textColor">@color/text_primary</item>
         <item name="android:onClick">numberAction</item>
     </style>
 
-    <style name="buttonOperator">
-        <item name="android:layout_weight">1</item>
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">match_parent</item>
-        <item name="android:background">@null</item>
-        <item name="android:textSize">25sp</item>
-        <item name="android:textColor">@color/orange</item>
+    <style name="buttonOperator" parent="buttonBase">
+        <item name="android:background">@drawable/button_operator</item>
+        <item name="android:textColor">@color/operator_text</item>
         <item name="android:onClick">operationAction</item>
     </style>
 
+    <style name="buttonAction" parent="buttonBase">
+        <item name="android:background">@drawable/button_action</item>
+        <item name="android:textColor">@color/action_text</item>
+    </style>
+
+    <style name="buttonActionDanger" parent="buttonAction">
+        <item name="android:textColor">@color/danger_text</item>
+    </style>
+
+    <style name="buttonEqual" parent="buttonBase">
+        <item name="android:background">@drawable/button_equal</item>
+        <item name="android:textColor">@color/background</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 </resources>
