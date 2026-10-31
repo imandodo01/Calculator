@@ -37,6 +37,31 @@ class CalculatorEngineTest {
         assertEquals(1.0, calculator.evaluate("5 + (-4)"), 0.000001)
     }
 
+    @Test
+    fun `handles nested parentheses`() {
+        assertEquals(20.0, calculator.evaluate("((2 + 3) * 4)"), 0.000001)
+    }
+
+    @Test
+    fun `handles repeated unary minus`() {
+        assertEquals(5.0, calculator.evaluate("--5"), 0.000001)
+    }
+
+    @Test
+    fun `ignores whitespace`() {
+        assertEquals(14.0, calculator.evaluate("  2 + 3 * 4  "), 0.000001)
+    }
+
+    @Test
+    fun `keeps floating point results`() {
+        assertEquals(1.0 / 3.0, calculator.evaluate("1 / 3"), 0.000001)
+    }
+
+    @Test
+    fun `handles large but valid numbers`() {
+        assertEquals(3000000000.0, calculator.evaluate("1000000000 * 3"), 0.000001)
+    }
+
     @Test(expected = ArithmeticException::class)
     fun `rejects division by zero`() {
         calculator.evaluate("10 / 0")
